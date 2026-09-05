@@ -1,4 +1,3 @@
-import { refreshStats } from "@/app/actions";
 import { getBooks, getSummary } from "@/lib/api";
 import { formatDate, formatDuration } from "@/lib/format";
 import type { Book, Summary } from "@/lib/types";
@@ -89,30 +88,19 @@ export default async function Page() {
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-10 sm:py-14">
-      <header className="mb-8 flex items-end justify-between gap-4">
-        <div>
-          <p
-            className="text-sm tracking-wide text-[#6f675c] uppercase"
-            style={{ fontFamily: "var(--font-sans)" }}
-          >
-            KOReader
-          </p>
-          <h1
-            className="text-4xl"
-            style={{ fontFamily: "var(--font-serif), Georgia, serif" }}
-          >
-            Reading
-          </h1>
-        </div>
-        <form action={refreshStats}>
-          <button
-            type="submit"
-            className="rounded-full border border-[#d8d0c4] bg-[#fbf7f0] px-4 py-2 text-sm text-[#2b241c]"
-            style={{ fontFamily: "var(--font-sans)" }}
-          >
-            Refresh
-          </button>
-        </form>
+      <header className="mb-8">
+        <p
+          className="text-sm tracking-wide text-[#6f675c] uppercase"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          KOReader
+        </p>
+        <h1
+          className="text-4xl"
+          style={{ fontFamily: "var(--font-serif), Georgia, serif" }}
+        >
+          Reading
+        </h1>
       </header>
 
       {summary.stale || summary.last_error ? (

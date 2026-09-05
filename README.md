@@ -31,6 +31,14 @@ cd backend && uvicorn app.main:app --reload --port 8000
 cd frontend && npm install && npm run dev
 ```
 
+## Hosted (Railway)
+
+The public site is read-only. Reload the page to pick up new Kindle data (30s cache). `POST /refresh` stays on the private backend only.
+
+Set these on the Railway **backend** service (never commit `.env`): `WEBDAV_URL`, `WEBDAV_USERNAME`, `WEBDAV_PASSWORD`, `KOREADER_DB_PATH`, `CACHE_TTL_SECONDS`, `TIMEZONE`, `DATA_DIR=/app/data`.
+
+Set `BACKEND_URL=http://backend.railway.internal:8000` on the **frontend** service. Do not give the backend a public domain.
+
 ## API
 
 ```bash
