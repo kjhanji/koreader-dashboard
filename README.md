@@ -2,13 +2,9 @@
 
 Syncs KOReader stats from a jailbroken Kindle via WebDAV → parses with FastAPI → visualizes with Next.js.
 
-## Increment 1 (backend)
+Opening or refreshing the dashboard downloads the latest `statistics.sqlite3` from Koofr (cached for 30 seconds). Koofr has no webhook, so an already-open tab does not jump the instant the Kindle uploads.
 
-Opening or refreshing the dashboard hits the API, which downloads the latest `statistics.sqlite3` from Koofr, parses it, and returns stats. Results are cached in memory for `CACHE_TTL_SECONDS` (default 30) so a page that calls several endpoints does not download the file three times. The Next.js UI is Increment 2.
-
-Koofr has no webhook, so the site cannot be pushed the instant the Kindle uploads. Opening or refreshing the page after KOReader syncs is enough to see the new data.
-
-### Setup
+## Setup
 
 ```bash
 cp .env.example .env
@@ -16,15 +12,26 @@ cp .env.example .env
 
 Fill in `WEBDAV_USERNAME` (Koofr email) and `WEBDAV_PASSWORD` (Koofr app-specific password). Defaults assume the file lives at `/readingStats/statistics.sqlite3` on `https://app.koofr.net/dav/Koofr`.
 
-### Run
+## Run
 
 ```bash
 docker compose up --build
 ```
 
-The API listens on `http://localhost:8000`.
+- Dashboard: http://localhost:3000
+- API: http://localhost:8000
 
-### Endpoints
+### Local (without Docker)
+
+```bash
+# backend
+cd backend && uvicorn app.main:app --reload --port 8000
+
+# frontend
+cd frontend && npm install && npm run dev
+```
+
+## API
 
 ```bash
 curl http://localhost:8000/health

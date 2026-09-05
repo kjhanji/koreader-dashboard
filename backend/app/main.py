@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.models import Book, BookStats, Health, RefreshResult, Summary
@@ -17,6 +18,12 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="KOReader Stats API", lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/health", response_model=Health)
