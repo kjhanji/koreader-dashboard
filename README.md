@@ -31,13 +31,11 @@ cd backend && uvicorn app.main:app --reload --port 8000
 cd frontend && npm install && npm run dev
 ```
 
-## Hosted (Railway)
+## Hosted (Vercel, free Hobby)
 
-The public site is read-only. Reload the page to pick up new Kindle data (30s cache). `POST /refresh` stays on the private backend only.
+The Next.js app fetches Koofr on the server. There is no public Refresh button; reload the page after KOReader syncs (30s cache).
 
-Set these on the Railway **backend** service (never commit `.env`): `WEBDAV_URL`, `WEBDAV_USERNAME`, `WEBDAV_PASSWORD`, `KOREADER_DB_PATH`, `CACHE_TTL_SECONDS`, `TIMEZONE`, `DATA_DIR=/app/data`.
-
-Set `BACKEND_URL=http://backend.railway.internal:8000` on the **frontend** service. Do not give the backend a public domain.
+Set these in the Vercel project (never commit `.env`): `WEBDAV_URL`, `WEBDAV_USERNAME`, `WEBDAV_PASSWORD`, `KOREADER_DB_PATH`, `CACHE_TTL_SECONDS`, `TIMEZONE`. Root directory: `frontend`.
 
 ## API
 
