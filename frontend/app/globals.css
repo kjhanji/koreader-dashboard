@@ -1,29 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f3eee4;
-  --ink: #2b241c;
-  --muted: #6f675c;
-  --rule: #d8d0c4;
-  --card: #fbf7f0;
-  --accent: #3f5d4a;
-  --warn: #8a4b2f;
+  --bg: #12141a;
+  --elev: #1a1d26;
+  --ink: #e6e4dc;
+  --muted: #9a9588;
+  --rule: #2a2d38;
+  --accent: #c4a574;
+  --warn: #c4785a;
+  --heat-0: #222632;
+  --heat-1: #3d3426;
+  --heat-2: #6e5a38;
+  --heat-3: #a5854d;
+  --heat-4: #c4a574;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --radius: 10px;
+  --radius-sm: 8px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f3f1ea;
+    --elev: #fffcf6;
+    --ink: #1c1e24;
+    --muted: #6b675c;
+    --rule: #ddd8cc;
+    --accent: #8a6d3b;
+    --warn: #a85a3a;
+    --heat-0: #e7e3d8;
+    --heat-1: #d6c7a4;
+    --heat-2: #c4a574;
+    --heat-3: #a5854d;
+    --heat-4: #6e5a38;
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.font-title {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.press {
+  touch-action: manipulation;
+  user-select: none;
+  transition: transform 140ms var(--ease-out);
+}
+
+.press:active {
+  transform: scale(0.97);
+}
+
+.press:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pressable-row:hover {
+    background: color-mix(in srgb, var(--elev) 70%, transparent);
+  }
 }
 
 .progress-track {
-  height: 0.4rem;
+  height: 3px;
   overflow: hidden;
-  border-radius: 999px;
-  background: var(--rule);
+  background: var(--heat-0);
 }
 
 .progress-fill {
   height: 100%;
-  border-radius: 999px;
   background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press {
+    transition: none;
+  }
 }
