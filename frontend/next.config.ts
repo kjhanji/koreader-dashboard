@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   ...(process.env.VERCEL ? {} : { output: "standalone" as const }),
   serverExternalPackages: ["sql.js"],
   outputFileTracingIncludes: {
-    "/*": ["./vendor/sql-wasm.wasm"],
+    "/*": ["./node_modules/sql.js/dist/sql-wasm.wasm"],
   },
   async rewrites() {
     return [

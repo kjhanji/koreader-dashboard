@@ -88,7 +88,7 @@ function rows(db: Database, sql: string): Record<string, unknown>[] {
 }
 
 async function parseWithSql(bytes: Uint8Array, timezone: string): Promise<Payload> {
-  const wasmPath = join(process.cwd(), "vendor/sql-wasm.wasm");
+  const wasmPath = join(process.cwd(), "node_modules/sql.js/dist/sql-wasm.wasm");
   const wasmBinary = new Uint8Array(readFileSync(wasmPath));
   const SQL = await initSqlJs({
     wasmBinary: wasmBinary.buffer as ArrayBuffer,
